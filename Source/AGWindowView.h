@@ -41,6 +41,7 @@
 @property (nonatomic, copy) void (^onDidMoveToWindow)(void);
 @property (nonatomic, copy) void (^onDidMoveOutOfWindow)(void);
 @property (nonatomic, assign) BOOL onlySubviewsCapturesTouch;
+@property (nonatomic, assign) CGFloat backgroundOpacity;
 
 - (id)initAndAddToWindow:(UIWindow *)window;
 - (id)initAndAddToKeyWindow;
@@ -48,8 +49,10 @@
 - (void)addSubViewAndKeepSamePosition:(UIView *)view;
 - (void)addSubviewAndFillBounds:(UIView *)view;
 - (void)addSubviewAndFillBounds:(UIView *)view withSlideUpAnimationOnDone:(void(^)(void))onDone;
+- (void)addSubviewAndFillBounds:(UIView *)view withSlideLeftAnimationOnDone:(void(^)(void))onDone;
 - (void)fadeOutAndRemoveFromSuperview:(void(^)(void))onDone;
 - (void)slideDownSubviewsAndRemoveFromSuperview:(void(^)(void))onDone;
+- (void)slideRightSubviewsAndRemoveFromSuperview:(void(^)(void))onDone;
 
 - (void)bringToFront;
 - (BOOL)isInFront;
