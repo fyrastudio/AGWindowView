@@ -375,6 +375,27 @@ static BOOL IS_IOS_8_OR_HIGHER()
 	}];
 }
 
+- (void)addSubviewAndFillBounds:(UIView *)view withSlideRightAnimationOnDone:(void(^)(void))onDone
+{
+    CGRect endFrame = [self bounds];
+    CGRect startFrame = endFrame;
+    startFrame.origin.x -= startFrame.size.width;
+    
+    view.frame = startFrame;
+    [self addSubview:view];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        view.frame = endFrame;
+        self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:self.backgroundOpacity];
+        self.opaque = YES;
+    } completion:^(BOOL finished) {
+        if(onDone)
+        {
+            onDone();
+        }
+    }];
+}
+
 - (void)fadeOutAndRemoveFromSuperview:(void(^)(void))onDone
 {
 	[UIView animateWithDuration:0.4 animations:^{
@@ -438,6 +459,32 @@ static BOOL IS_IOS_8_OR_HIGHER()
 			onDone();
 		}
 	}];
+}
+
+- (void)slideLeftSubviewsAndRemoveFromSuperview:(void(^)(void))onDone
+{
+    self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:self.backgroundOpacity];
+    self.opaque = YES;
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        
+        for(UIView *subview in [self subviews])
+        {
+            CGRect frame = subview.frame;
+            frame.origin.x -= self.bounds.size.width;
+            subview.frame = frame;
+        }
+        
+        self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
+        self.opaque = NO;
+        
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+        if(onDone)
+        {
+            onDone();
+        }
+    }];
 }
 
 - (void)bringToFront
