@@ -50,9 +50,11 @@
 - (void)addSubviewAndFillBounds:(UIView *)view;
 - (void)addSubviewAndFillBounds:(UIView *)view withSlideUpAnimationOnDone:(void(^)(void))onDone;
 - (void)addSubviewAndFillBounds:(UIView *)view withSlideLeftAnimationOnDone:(void(^)(void))onDone;
+- (void)addSubviewAndFillBounds:(UIView *)view withSlideRightAnimationOnDone:(void(^)(void))onDone;
 - (void)fadeOutAndRemoveFromSuperview:(void(^)(void))onDone;
 - (void)slideDownSubviewsAndRemoveFromSuperview:(void(^)(void))onDone;
 - (void)slideRightSubviewsAndRemoveFromSuperview:(void(^)(void))onDone;
+- (void)slideLeftSubviewsAndRemoveFromSuperview:(void(^)(void))onDone;
 
 - (void)bringToFront;
 - (BOOL)isInFront;
